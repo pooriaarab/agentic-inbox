@@ -1,0 +1,88 @@
+export { VERSION } from "./version.js";
+export {
+  defineBrand,
+  createLogger,
+  GuardError,
+  VendorError,
+  createGuards,
+  LocalRouterAdapter,
+  HttpRouterAdapter,
+  recordCost,
+  getCostReport,
+  resetCosts,
+  createDryRunResult,
+  dispatchText,
+  summarizeText,
+} from "./core.js";
+export type {
+  BrandConfig,
+  LogLevel,
+  Logger,
+  LoggerOptions,
+  CapsConfig,
+  QuietHoursConfig,
+  GuardsConfig,
+  Guards,
+  DispatchReceipt,
+  RouterAdapter,
+  HttpRouterOptions,
+  CostEntry,
+  CostReport,
+  DispatchOptions,
+  DispatchResult,
+  TopWord,
+  TextSummary,
+  SummarizeOptions,
+} from "./core.js";
+export {
+  validateMessage,
+  oneClickHeaders,
+  ResendAdapter,
+  PostmarkAdapter,
+  InstantlyAdapter,
+  SmartleadAdapter,
+  checkDns,
+  buildWarmupPlan,
+  sendMail,
+  defaultAdapters,
+  selectAdapters,
+} from "./mail.js";
+export type {
+  MailMessage,
+  MailReceipt,
+  MailAdapter,
+  AdapterOptions,
+  PostmarkOptions,
+  InstantlyOptions,
+  SmartleadOptions,
+  SmartleadStatus,
+  DnsCheck,
+  DnsReport,
+  DnsOptions,
+  WarmupPlanDay,
+  WarmupPlanOptions,
+  SendOptions,
+  AdapterSendResult,
+  SendResult,
+  AdapterSetOptions,
+} from "./mail.js";
+
+import { defineBrand, type BrandConfig } from "./core.js";
+import { VERSION } from "./version.js";
+
+export const DEFAULT_BRAND: BrandConfig = defineBrand({
+  name: "Agentic mail",
+  command: "agentic-mail",
+  description: "Send mail via transactional plus cold vendors.",
+  keywords: [
+    "email",
+    "resend",
+    "cold-email",
+    "agentic-suite",
+    "claude-code",
+    "codex",
+    "cli",
+    "mcp",
+  ],
+  version: VERSION,
+});

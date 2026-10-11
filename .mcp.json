@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agentic-mail": {
+      "command": "npx",
+      "args": ["-y", "agentic-mail", "mcp"]
+    }
+  }
+}
