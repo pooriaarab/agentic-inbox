@@ -20,7 +20,7 @@ export default {
   async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/health") {
-      return json({ ok: true, pack: env.PACK_NAME ?? "agentic-email", version: VERSION });
+      return json({ ok: true, pack: env.PACK_NAME ?? "agentic-inbox", version: VERSION });
     }
     if (request.method === "POST" && url.pathname === "/preview") {
       let body: unknown;

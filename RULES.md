@@ -1,6 +1,6 @@
 # Agentic mail rules
 
-These rules bind every run of agentic-email. They also bind
+These rules bind every run of agentic-inbox. They also bind
 agents that drive this pack over MCP.
 
 1. Preview before you act. Run each send with dry run first.

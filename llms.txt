@@ -1,15 +1,15 @@
-# agentic-email
+# agentic-inbox
 
 Send mail via transactional plus cold vendors.
 
 Keywords: email, resend, cold-email, agentic-suite, claude-code, codex, cli, mcp.
 
-- SDK: import { sendMail } from "agentic-email".
-- CLI: agentic-email send --from "..." --to "..." --subject "..." --text "...".
-- MCP: run agentic-email mcp, then call send_mail.
+- SDK: import { sendMail } from "agentic-inbox".
+- CLI: agentic-inbox send --from "..." --to "..." --subject "..." --text "...".
+- MCP: run agentic-inbox mcp, then call send_mail.
 
 ## Docs
 
-- README: https://github.com/pooriaarab/agentic-email
-- Core contract: https://github.com/pooriaarab/agentic-email/blob/main/docs/agentic-core.md
+- README: https://github.com/pooriaarab/agentic-inbox
+- Core contract: https://github.com/pooriaarab/agentic-inbox/blob/main/docs/agentic-core.md
 - License: MIT
