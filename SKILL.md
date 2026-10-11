@@ -1,16 +1,16 @@
 ---
-name: agentic-email
+name: agentic-inbox
 description: Send mail via transactional plus cold vendors. Keywords: email, resend, cold-email, agentic-suite, claude-code, codex, cli, mcp.
 ---
 
-# agentic-email
+# agentic-inbox
 
 Send mail via transactional plus cold vendors.
 
 ## Use the SDK
 
 ```js
-import { sendMail, ResendAdapter } from "agentic-email";
+import { sendMail, ResendAdapter } from "agentic-inbox";
 
 await sendMail(
   { from: "you@example.com", to: ["friend@example.com"], subject: "Hi", text: "Hello" },
@@ -21,13 +21,13 @@ await sendMail(
 ## Use the CLI
 
 ```sh
-agentic-email send --from you@example.com --to friend@example.com --subject "Hi" --text "Hello"
-agentic-email dns --domain example.com
+agentic-inbox send --from you@example.com --to friend@example.com --subject "Hi" --text "Hello"
+agentic-inbox dns --domain example.com
 ```
 
 ## Use the MCP server
 
-Start the server with `agentic-email mcp`. Call `send_mail`
+Start the server with `agentic-inbox mcp`. Call `send_mail`
 to send, `check_dns` for records, `get_cost_report` for costs.
 
 ## Rules

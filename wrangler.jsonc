@@ -1,9 +1,9 @@
 {
   // Pack worker config. Deploy with wrangler deploy from the pack root.
-  "name": "agentic-email",
+  "name": "agentic-inbox",
   "main": "src/worker.ts",
   "compatibility_date": "2026-01-01",
   "vars": {
-    "PACK_NAME": "agentic-email"
+    "PACK_NAME": "agentic-inbox"
   }
 }
