@@ -47,7 +47,7 @@ Select adapters with `--adapter`, or use `all`.
 ## SDK
 
 ```js
-import { sendMail, ResendAdapter } from "agentic-mail";
+import { sendMail, ResendAdapter } from "agentic-email";
 
 const preview = await sendMail(
   { from: "you@example.com", to: ["friend@example.com"], subject: "Hi", text: "Hello" },
@@ -63,7 +63,7 @@ Dry run is the default. Pass `dryRun: false` to send for real.
 
 ## MCP
 
-Start the server with `agentic-mail mcp` or `npx agentic-mail mcp`.
+Start the server with `agentic-email mcp` or `npx agentic-email mcp`.
 
 | Tool | Use it for |
 | --- | --- |
@@ -101,5 +101,5 @@ Stop a cold campaign with `stop --vendor smartlead --campaign 123`.
 
 ## Docs
 
-- Core contract: https://github.com/pooriaarab/agentic-mail/blob/main/docs/agentic-core.md
+- Core contract: https://github.com/pooriaarab/agentic-email/blob/main/docs/agentic-core.md
 - License: MIT

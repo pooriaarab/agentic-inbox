@@ -72,7 +72,7 @@ import { VERSION } from "./version.js";
 
 export const DEFAULT_BRAND: BrandConfig = defineBrand({
   name: "Agentic mail",
-  command: "agentic-mail",
+  command: "agentic-email",
   description: "Send mail via transactional plus cold vendors.",
   keywords: [
     "email",

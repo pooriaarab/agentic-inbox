@@ -9,9 +9,9 @@ One core serves all three faces, so each face returns the same shape.
 
 ## The three faces
 
-- SDK: `import { sendMail } from "agentic-mail"`.
-- CLI: `npx agentic-mail send --from "..." --to "..." --subject "..." --text "..."`.
-- MCP: `npx agentic-mail mcp`, then call a tool below.
+- SDK: `import { sendMail } from "agentic-email"`.
+- CLI: `npx agentic-email send --from "..." --to "..." --subject "..." --text "..."`.
+- MCP: `npx agentic-email mcp`, then call a tool below.
 
 Keywords: email, resend, cold-email, agentic-suite, claude-code, codex, cli, mcp.
 

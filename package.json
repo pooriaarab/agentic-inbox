@@ -1,5 +1,5 @@
 {
-  "name": "agentic-mail",
+  "name": "agentic-email",
   "version": "0.1.0",
   "description": "Send mail via transactional plus cold vendors.",
   "keywords": [
@@ -16,7 +16,7 @@
   "author": "Pooria Arab",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pooriaarab/agentic-mail.git"
+    "url": "https://github.com/pooriaarab/agentic-email.git"
   },
   "type": "module",
   "engines": {
@@ -36,7 +36,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "mcpName": "io.github.pooriaarab/agentic-mail",
+  "mcpName": "io.github.pooriaarab/agentic-email",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -46,8 +46,8 @@
     }
   },
   "bin": {
-    "agentic-mail": "./dist/cli.js",
-    "agentic-mail-mcp": "./dist/mcp-bin.js"
+    "agentic-email": "./dist/cli.js",
+    "agentic-email-mcp": "./dist/mcp-bin.js"
   },
   "scripts": {
     "build": "tsup",
