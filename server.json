@@ -1,10 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.pooriaarab/agentic-mail",
+  "name": "io.github.pooriaarab/agentic-email",
   "description": "Send mail via transactional plus cold vendors.",
   "version": "0.1.0",
   "repository": {
-    "url": "https://github.com/pooriaarab/agentic-mail",
+    "url": "https://github.com/pooriaarab/agentic-email",
     "source": "github",
     "id": 1413726872
   },
@@ -12,7 +12,7 @@
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "agentic-mail",
+      "identifier": "agentic-email",
       "version": "0.1.0",
       "transport": { "type": "stdio" },
       "runtimeHint": "npx",
