@@ -1,14 +1,18 @@
 {
   "name": "agentic-inbox",
   "version": "0.1.0",
-  "description": "Send mail via transactional plus cold vendors.",
+  "description": "Send email with Resend and Postmark, queue Instantly and Smartlead campaign leads, and check DNS through a TypeScript SDK, CLI, and MCP server.",
   "keywords": [
     "email",
-    "resend",
+    "transactional-email",
     "cold-email",
-    "agentic-suite",
-    "claude-code",
-    "codex",
+    "resend",
+    "postmark",
+    "instantly",
+    "smartlead",
+    "dns",
+    "email-warmup",
+    "typescript",
     "cli",
     "mcp"
   ],
