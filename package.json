@@ -1,6 +1,6 @@
 {
   "name": "agentic-inbox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Send email with Resend and Postmark, queue Instantly and Smartlead campaign leads, and check DNS through a TypeScript SDK, CLI, and MCP server.",
   "keywords": [
     "email",
