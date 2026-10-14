@@ -1,105 +1,81 @@
-# Agentic mail
+# agentic-inbox
 
-Send mail via transactional plus cold vendors.
+[![npm version](https://img.shields.io/npm/v/agentic-inbox)](https://www.npmjs.com/package/agentic-inbox) [![Downloads/month](https://img.shields.io/npm/dm/agentic-inbox)](https://www.npmjs.com/package/agentic-inbox) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/license/mit)
 
-Send a receipt after checkout.
-Confirm a new address with a link.
-Queue a follow-up note for a prospect.
+[Package and API types](https://www.npmjs.com/package/agentic-inbox)
 
-## Start
+agentic-inbox is an open-source email adapter package for developers sending transactional email and adding leads to cold-email campaigns.
 
-Use Node 18 or later. Install and check the pack:
+## Install
 
 ```sh
-npm install
-npm run build
-npm run typecheck
-npm test
-node dist/cli.js --help
-node dist/cli.js send --from you@example.com --to friend@example.com --subject "Hi" --text "Hello"
-node dist/cli.js dns --domain example.com
-node dist/cli.js warmup plan --days 3
-node dist/cli.js costs
+npm install agentic-inbox
 ```
 
-Send defaults to a dry run. It calls no vendor and records no cost.
-Add `--live` to send for real. Each adapter reports its own result.
-A failed adapter causes CLI exit 1. Bad usage exits 2.
-Cost entries count mails, not currency.
-Reports stay in the current process and reset when it exits.
+Requires Node.js 18 or later. Includes TypeScript types and three direct runtime dependencies.
 
-## Adapters
-
-| Adapter | Setup | Sends through |
-| --- | --- | --- |
-| resend | RESEND_API_KEY | Resend email API |
-| postmark | POSTMARK_SERVER_TOKEN | Postmark email API |
-| instantly | INSTANTLY_API_KEY plus campaign | Instantly campaign lead |
-| smartlead | SMARTLEAD_API_KEY plus campaign | Smartlead campaign lead |
-
-Keys also accept `apiKey` in adapter constructors.
-Network adapters accept `fetchFn` and `timeoutMs`.
-Cold adapters need a campaign id. Pass `--campaign` or set
-INSTANTLY_CAMPAIGN_ID or SMARTLEAD_CAMPAIGN_ID in the environment.
-Cold adapters queue the first recipient as a campaign lead.
-Select adapters with `--adapter`, or use `all`.
-
-## SDK
+## Preview your first email
 
 ```js
-import { sendMail, ResendAdapter } from "agentic-inbox";
-
-const preview = await sendMail(
-  { from: "you@example.com", to: ["friend@example.com"], subject: "Hi", text: "Hello" },
-  { adapters: [new ResendAdapter()], dryRun: true },
-);
-console.log(preview);
+import { sendMail, ResendAdapter, getCostReport } from "agentic-inbox";
+const message = {
+  from: "you@example.com", to: ["friend@example.com"],
+  subject: "Hi", text: "Hello",
+};
+console.log(await sendMail(message, { adapters: [new ResendAdapter()] }));
+console.log(getCostReport());
 ```
 
-sendMail accepts adapters, guards, logger, and dryRun.
-It checks guards before any adapter call and fans out live sends.
-Each live adapter call records a send entry, including zero units on failure.
-Dry run is the default. Pass `dryRun: false` to send for real.
-
-## MCP
-
-Start the server with `agentic-inbox mcp` or `npx agentic-inbox mcp`.
-
-| Tool | Use it for |
-| --- | --- |
-| send_mail | Send one mail. Dry run is the default. |
-| check_dns | Check SPF, DKIM, and DMARC for a domain. |
-| warmup_plan | Build a daily send ramp. |
-| warmup_status | Read warmup stats from a cold vendor. |
-| stop_campaign | Pause or stop a cold campaign. |
-| get_cost_report | Read session cost totals. |
-
-## Deliverability
-
-Check DNS before you send from a new domain:
+Success prints `dryRun: true`, the recipient, and `adapters: ["resend"]`. No key is needed; no email is sent.
+Export provider keys in your shell; the package does not load `.env` files.
 
 ```sh
-node dist/cli.js dns --domain example.com --selector s1
+export RESEND_API_KEY="your-key"
+npx agentic-inbox send --adapter resend --from you@your-domain.com --to friend@example.com --subject Hi --text Hello --live
 ```
 
-The report shows SPF, DKIM, and DMARC records.
-Warm a new mailbox with a ramp:
+Use a provider-approved sender. Success prints `ok: true` and a receipt ID; this confirms API acceptance, not inbox delivery.
 
-```sh
-node dist/cli.js warmup plan --start 10 --step 10 --max 100 --days 14
+## How it works
+
+```text
+SDK / CLI / MCP -> validation + optional guards -> preview OR selected adapters
 ```
 
-Read vendor warmup stats with `warmup status`.
-Bulk mail carries one-click stop headers when you pass `--unsubscribe-url`.
-Stop a cold campaign with `stop --vendor smartlead --campaign 123`.
+## Provider coverage
 
-## Rules
+| Provider | Implemented operation | Environment variables |
+| --- | --- | --- |
+| Resend | Send email | `RESEND_API_KEY` |
+| Postmark | Send email | `POSTMARK_SERVER_TOKEN` |
+| Instantly | Add campaign lead, warmup analytics, pause campaign | `INSTANTLY_API_KEY`, `INSTANTLY_CAMPAIGN_ID` |
+| Smartlead | Import campaign lead, warmup stats, campaign status | `SMARTLEAD_API_KEY`, `SMARTLEAD_CAMPAIGN_ID` |
 
-- Preview each send with a dry run first.
-- Report guard denials and adapter errors as failures.
-- Read the cost report at the end.
+All four adapters implement HTTP requests. Live credential verification is pending in this README review.
+Pass campaign IDs through constructor options or CLI `--campaign` to override environment values.
 
-## Docs
+## Features and runtime surfaces
 
-- Core contract: https://github.com/pooriaarab/agentic-inbox/blob/main/docs/agentic-core.md
-- License: MIT
+- CLI: `send`, `dns`, `warmup plan`, `warmup status`, `stop`, `costs`, `mcp`; `--help` and `--version` print metadata.
+- Model Context Protocol (MCP): `send_mail`, `check_dns`, `warmup_plan`, `warmup_status`, `stop_campaign`, `get_cost_report`.
+- Start the stdio server with `npx agentic-inbox mcp`. Sending previews by default; SDK live sends require `dryRun: false`.
+- Check Sender Policy Framework (SPF), DomainKeys Identified Mail (DKIM), and Domain-based Message Authentication, Reporting, and Conformance (DMARC) records.
+- Run `npx agentic-inbox dns --domain example.com --selector s1`; DNS checks require the correct DKIM selector.
+- Run `npx agentic-inbox warmup plan --days 3` for a send ramp. The plan does not execute warmup.
+- Resend and Postmark attach one-click unsubscribe headers when `unsubscribeUrl` is set; you must implement the unsubscribe endpoint.
+
+## Behavior limits and status
+
+Live sends fan out to every selected adapter; the CLI and MCP default to all four. Select adapters explicitly to limit dispatch.
+Instantly and Smartlead queue only the first recipient. They do not forward subject, body, or unsubscribe headers.
+Adapter requests default to a 10-second timeout without automatic retries. Each live result reports its own success or error.
+Costs count recipient units, not currency, and remain process-local. Read `getCostReport()` within the sending process.
+DNS record presence does not prove deliverability. This package provides no managed email service or inbox reader.
+The repository Worker implements health, preview, and warmup-plan routes only; it cannot send email.
+Version 0.1.0 APIs can change. Support uses repository issues; access may require repository permissions.
+
+## Contributing and license
+
+Preview each send first, report guard denials, and read the session cost report after live work.
+Run `npm run build && npm run typecheck && npm test` before pushing. The `release` branch publishes new versions.
+License: MIT.
